@@ -74,7 +74,11 @@ public class Recommended {
         JFrame frame = new JFrame("Recommended Movies");
 
         JButton goBackButton = new JButton("Go Back");
-        JButton rateButton = new JButton("Rate!");
+        JButton deleteButton = new JButton("Delete");
+
+        //Delete Button
+        deleteButton.setActionCommand("Delete");
+        goBackButton.setActionCommand("Go Back");
 
 
 
@@ -109,44 +113,43 @@ public class Recommended {
 
         list.setModel(model);
         //Add movies to list
-        model.addElement(new Movies("A Team", 1));
-        model.addElement(new Movies("A Team", 5));
-        model.addElement(new Movies("A Team", 2));
-        model.addElement(new Movies("A Team", 7));
-        model.addElement(new Movies("A Team", 3));
-        model.addElement(new Movies("A Team", 8));
-        model.addElement(new Movies("A Team", 5));
-        model.addElement(new Movies("A Team", 1));
-        model.addElement(new Movies("A Team", 9));
-        model.addElement(new Movies("A Team", 5));
-        model.addElement(new Movies("A Team", 5));
-        model.addElement(new Movies("A Team", 5));
-        model.addElement(new Movies("A Team", 5));
-        model.addElement(new Movies("A Team", 5));
-        model.addElement(new Movies("A Team", 5));
-        model.addElement(new Movies("A Team", 5));
-        model.addElement(new Movies("A Team", 5));
-        model.addElement(new Movies("A Team", 5));
-        model.addElement(new Movies("A Team", 5));
-        model.addElement(new Movies("A Team", 5));
-        model.addElement(new Movies("A Team", 5));
-        model.addElement(new Movies("A Team", 5));
-        model.addElement(new Movies("A Team", 5));
-        model.addElement(new Movies("A Team", 2));
-        model.addElement(new Movies("A Team", 5));
-        model.addElement(new Movies("A Team", 5));
-        model.addElement(new Movies("A Team", 9));
-        model.addElement(new Movies("A Team", 5));
-        model.addElement(new Movies("A Team", 7));
-        model.addElement(new Movies("A Team", 6));
-        model.addElement(new Movies("A Team", 5));
-        model.addElement(new Movies("A Team", 3));
-        model.addElement(new Movies("A Team", 4));
+        model.addElement(new Recommended.Movies("A Team", 1));
+        model.addElement(new Recommended.Movies("B Team", 5));
+        model.addElement(new Recommended.Movies("C Team", 2));
+        model.addElement(new Recommended.Movies("D Team", 7));
+        model.addElement(new Recommended.Movies("E Team", 3));
+        model.addElement(new Recommended.Movies("F Team", 8));
+        model.addElement(new Recommended.Movies("G Team", 5));
+        model.addElement(new Recommended.Movies("H Team", 1));
+        model.addElement(new Recommended.Movies("I Team", 9));
+        model.addElement(new Recommended.Movies("J Team", 5));
+        model.addElement(new Recommended.Movies("K Team", 5));
+        model.addElement(new Recommended.Movies("L Team", 5));
+        model.addElement(new Recommended.Movies("M Team", 5));
+        model.addElement(new Recommended.Movies("N Team", 5));
+        model.addElement(new Recommended.Movies("O Team", 5));
+        model.addElement(new Recommended.Movies("P Team", 5));
+        model.addElement(new Recommended.Movies("Q Team", 5));
+        model.addElement(new Recommended.Movies("R Team", 5));
+        model.addElement(new Recommended.Movies("S Team", 5));
+        model.addElement(new Recommended.Movies("T Team", 5));
+        model.addElement(new Recommended.Movies("U Team", 5));
+        model.addElement(new Recommended.Movies("V Team", 5));
+        model.addElement(new Recommended.Movies("X Team", 5));
+        model.addElement(new Recommended.Movies("Y Team", 2));
+        model.addElement(new Recommended.Movies("Z Team", 5));
+        model.addElement(new Recommended.Movies("1 Team", 5));
+        model.addElement(new Recommended.Movies("2 Team", 9));
+        model.addElement(new Recommended.Movies("3 Team", 5));
+        model.addElement(new Recommended.Movies("4 Team", 7));
+        model.addElement(new Recommended.Movies("5 Team", 6));
+        model.addElement(new Recommended.Movies("6 Team", 5));
+        model.addElement(new Recommended.Movies("7 Team", 3));
+        model.addElement(new Recommended.Movies("8 Team", 4));
 
         list.getSelectionModel().addListSelectionListener(e -> {
            Movies m = list.getSelectedValue();
            label.setText("Name: " + m.getName() + "         Rating: " + m.getRating());
-           panel.add(rateButton);
         });
 
         //Creating panel
@@ -157,16 +160,50 @@ public class Recommended {
 
         panel.setLayout(null);
         //Set position of buttons and Movie Descriptions
-        goBackButton.setBounds(120,400,100,20);
-        rateButton.setBounds(800,20,100,20);
+        goBackButton.setBounds(80,400,100,20);
+        deleteButton.setBounds(220,400,100,20);
         label.setBounds(80, 5, 300, 40);
         //Create buttons on top of panel
         panel.add(goBackButton);
+        panel.add(deleteButton);
 
-    }
+        //Delete Button begin
+        deleteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
 
-    private void createUIComponents() {
-        // TODO: place custom component creation code here
+                int index = list.getSelectedIndex();
+                model.remove(index);
 
-    }
+                int size = model.getSize();
+
+
+                if(size == 0) {
+                    deleteButton.setEnabled(false);
+                }
+                else  {
+                    if(index == model.getSize()) index--;
+                }
+
+                list.setSelectedIndex(index);
+                list.ensureIndexIsVisible(index);
+
+            }
+        });
+
+        //Delete Button end
+
+        //Go Back Button Begin
+        goBackButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Intro object1 = new Intro();
+                object1.fun1();
+            }
+        });
+        //Go back Button end
+
+    } //End function 1
+
+
 }

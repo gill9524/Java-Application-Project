@@ -16,20 +16,177 @@ public class AllMovies {
         });
     }
 
+    //Class for movies
+    private class Movies{
+        String name;
+        int rating;
+
+        public Movies(String name, int rating){
+            this.name = name;
+            this.rating = rating;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public int getRating() {
+            return rating;
+        }
+
+        public void setName() {
+            this.name = name;
+        }
+
+        public void setRating() {
+            this.rating = rating;
+        }
+
+        @Override
+        public String toString() {
+            return name;
+        }
+
+
+
+    }
+
     public void fun1()
     {
         //Create and set up the window.
-        JFrame frame = new JFrame("All Movies");
+        JFrame frame = new JFrame("AllMovies Movies");
+
+        JButton goBackButton = new JButton("Go Back");
+        JButton deleteButton = new JButton("Delete");
+
+        //Delete Button
+        deleteButton.setActionCommand("Delete");
+        goBackButton.setActionCommand("Go Back");
+
+
+
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setContentPane(new AllMovies() .goBackButton);
+        //frame.setContentPane(new AllMovies() .goBackButton);
 
         JLabel emptyLabel = new JLabel("");
+
+        //Declaration of panel and list
+        JList<AllMovies.Movies> list = new JList();
+        DefaultListModel<AllMovies.Movies> model = new DefaultListModel<> ();
+
+        JLabel label = new JLabel();
+        JPanel panel = new JPanel();
+
+        JSplitPane splitPane = new JSplitPane();
+
+
         //emptyLabel.setPreferredSize(new Dimension(600, 450));
         frame.getContentPane().add(emptyLabel, BorderLayout.CENTER);
 
+
         //Display the window.
+        // frame.pack();
+        frame.add(splitPane);
         frame.setSize(600,450);
-       // frame.pack();
         frame.setVisible(true);
-    }
+
+        splitPane.setDividerLocation(.4);
+
+
+
+        list.setModel(model);
+        //Add movies to list
+        model.addElement(new AllMovies.Movies("A Team", 1));
+        model.addElement(new AllMovies.Movies("B Team", 5));
+        model.addElement(new AllMovies.Movies("C Team", 2));
+        model.addElement(new AllMovies.Movies("D Team", 7));
+        model.addElement(new AllMovies.Movies("E Team", 3));
+        model.addElement(new AllMovies.Movies("F Team", 8));
+        model.addElement(new AllMovies.Movies("G Team", 5));
+        model.addElement(new AllMovies.Movies("H Team", 1));
+        model.addElement(new AllMovies.Movies("I Team", 9));
+        model.addElement(new AllMovies.Movies("J Team", 5));
+        model.addElement(new AllMovies.Movies("K Team", 5));
+        model.addElement(new AllMovies.Movies("L Team", 5));
+        model.addElement(new AllMovies.Movies("M Team", 5));
+        model.addElement(new AllMovies.Movies("N Team", 5));
+        model.addElement(new AllMovies.Movies("O Team", 5));
+        model.addElement(new AllMovies.Movies("P Team", 5));
+        model.addElement(new AllMovies.Movies("Q Team", 5));
+        model.addElement(new AllMovies.Movies("R Team", 5));
+        model.addElement(new AllMovies.Movies("S Team", 5));
+        model.addElement(new AllMovies.Movies("T Team", 5));
+        model.addElement(new AllMovies.Movies("U Team", 5));
+        model.addElement(new AllMovies.Movies("V Team", 5));
+        model.addElement(new AllMovies.Movies("X Team", 5));
+        model.addElement(new AllMovies.Movies("Y Team", 2));
+        model.addElement(new AllMovies.Movies("Z Team", 5));
+        model.addElement(new AllMovies.Movies("1 Team", 5));
+        model.addElement(new AllMovies.Movies("2 Team", 9));
+        model.addElement(new AllMovies.Movies("3 Team", 5));
+        model.addElement(new AllMovies.Movies("4 Team", 7));
+        model.addElement(new AllMovies.Movies("5 Team", 6));
+        model.addElement(new AllMovies.Movies("6 Team", 5));
+        model.addElement(new AllMovies.Movies("7 Team", 3));
+        model.addElement(new AllMovies.Movies("8 Team", 4));
+
+        list.getSelectionModel().addListSelectionListener(e -> {
+            AllMovies.Movies m = list.getSelectedValue();
+            label.setText("Name: " + m.getName() + "         Rating: " + m.getRating());
+        });
+
+        //Creating panel
+        splitPane.setLeftComponent(new JScrollPane(list));
+        panel.add(label);
+
+        splitPane.setRightComponent(panel);
+
+        panel.setLayout(null);
+        //Set position of buttons and Movie Descriptions
+        goBackButton.setBounds(80,400,100,20);
+        deleteButton.setBounds(220,400,100,20);
+        label.setBounds(80, 5, 300, 40);
+        //Create buttons on top of panel
+        panel.add(goBackButton);
+        panel.add(deleteButton);
+
+        //Delete Button begin
+        deleteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                int index = list.getSelectedIndex();
+                model.remove(index);
+
+                int size = model.getSize();
+
+
+                if(size == 0) {
+                    deleteButton.setEnabled(false);
+                }
+                else  {
+                    if(index == model.getSize()) index--;
+                }
+
+                list.setSelectedIndex(index);
+                list.ensureIndexIsVisible(index);
+
+            }
+        });
+
+        //Delete Button end
+
+        //Go Back Button Begin
+        goBackButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Intro object1 = new Intro();
+                object1.fun1();
+            }
+        });
+        //Go back Button end
+
+
+    } //End function 1
+
 }
