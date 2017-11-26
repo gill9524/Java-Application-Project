@@ -51,19 +51,7 @@ public class Recommended {
 
 
     }
-/*
-    public Recommended() {
 
-        //Go Back Button Listener
-        goBackButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Intro object1 = new Intro();
-                object1.fun1();
-            }
-        });
-    }
-*/
 
 
     public void fun1()
@@ -75,11 +63,12 @@ public class Recommended {
 
         JButton goBackButton = new JButton("Go Back");
         JButton deleteButton = new JButton("Delete");
+        JButton rateButton = new JButton("Rate");
 
-        //Delete Button
+        // Button
         deleteButton.setActionCommand("Delete");
         goBackButton.setActionCommand("Go Back");
-
+        rateButton.setActionCommand("Rate");
 
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -93,6 +82,8 @@ public class Recommended {
 
         JLabel label = new JLabel();
         JPanel panel = new JPanel();
+
+
 
         JSplitPane splitPane = new JSplitPane();
 
@@ -156,16 +147,26 @@ public class Recommended {
         splitPane.setLeftComponent(new JScrollPane(list));
         panel.add(label);
 
+        //Textfield Rating Decleration
+        final JTextField inputRating = new JTextField(50);
+        panel.add(inputRating);
+        inputRating.setText("Enter Rating");
+        inputRating.setBounds(5,370,100,20);
+
         splitPane.setRightComponent(panel);
 
         panel.setLayout(null);
         //Set position of buttons and Movie Descriptions
-        goBackButton.setBounds(80,400,100,20);
-        deleteButton.setBounds(220,400,100,20);
+        goBackButton.setBounds(120,400,100,20);
+        deleteButton.setBounds(236,400,100,20);
+        rateButton.setBounds(5, 400, 100, 20);
         label.setBounds(80, 5, 300, 40);
         //Create buttons on top of panel
         panel.add(goBackButton);
         panel.add(deleteButton);
+        panel.add(rateButton);
+
+
 
         //Delete Button begin
         deleteButton.addActionListener(new ActionListener() {
@@ -192,6 +193,28 @@ public class Recommended {
         });
 
         //Delete Button end
+
+        //Rate Button Begin
+        rateButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String ratingInput = inputRating.getText();
+                int rating = Integer.parseInt(ratingInput);
+
+
+                int index = list.getSelectedIndex();    //Receives position of selected movie
+                Movies movieSelected = list.getSelectedValue(); //Receives information on movie
+
+
+
+                //Fill in code to send rating of the selected movie
+                // to a function that will return movies
+                // to be added into the recommendations list via some algorithm
+
+            }
+        });
+
+        //Rate Button end
 
         //Go Back Button Begin
         goBackButton.addActionListener(new ActionListener() {
