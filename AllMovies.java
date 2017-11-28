@@ -2,11 +2,20 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+
+
+import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AllMovies {
     private JButton goBackButton;
 
-    public AllMovies() {
+    public AllMovies()  {
         goBackButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -51,8 +60,15 @@ public class AllMovies {
 
     }
 
+
+
     public void fun1()
     {
+
+
+
+        //GUI
+        //--------------------------------------------------------------------------------
         //Create and set up the window.
         JFrame frame = new JFrame("AllMovies Movies");
 
@@ -95,43 +111,25 @@ public class AllMovies {
 
         splitPane.setDividerLocation(.4);
 
-
-
+        //Add Movies to list
         list.setModel(model);
-        //Add movies to list
-        model.addElement(new AllMovies.Movies("A Team", 1));
-        model.addElement(new AllMovies.Movies("B Team", 5));
-        model.addElement(new AllMovies.Movies("C Team", 2));
-        model.addElement(new AllMovies.Movies("D Team", 7));
-        model.addElement(new AllMovies.Movies("E Team", 3));
-        model.addElement(new AllMovies.Movies("F Team", 8));
-        model.addElement(new AllMovies.Movies("G Team", 5));
-        model.addElement(new AllMovies.Movies("H Team", 1));
-        model.addElement(new AllMovies.Movies("I Team", 9));
-        model.addElement(new AllMovies.Movies("J Team", 5));
-        model.addElement(new AllMovies.Movies("K Team", 5));
-        model.addElement(new AllMovies.Movies("L Team", 5));
-        model.addElement(new AllMovies.Movies("M Team", 5));
-        model.addElement(new AllMovies.Movies("N Team", 5));
-        model.addElement(new AllMovies.Movies("O Team", 5));
-        model.addElement(new AllMovies.Movies("P Team", 5));
-        model.addElement(new AllMovies.Movies("Q Team", 5));
-        model.addElement(new AllMovies.Movies("R Team", 5));
-        model.addElement(new AllMovies.Movies("S Team", 5));
-        model.addElement(new AllMovies.Movies("T Team", 5));
-        model.addElement(new AllMovies.Movies("U Team", 5));
-        model.addElement(new AllMovies.Movies("V Team", 5));
-        model.addElement(new AllMovies.Movies("X Team", 5));
-        model.addElement(new AllMovies.Movies("Y Team", 2));
-        model.addElement(new AllMovies.Movies("Z Team", 5));
-        model.addElement(new AllMovies.Movies("1 Team", 5));
-        model.addElement(new AllMovies.Movies("2 Team", 9));
-        model.addElement(new AllMovies.Movies("3 Team", 5));
-        model.addElement(new AllMovies.Movies("4 Team", 7));
-        model.addElement(new AllMovies.Movies("5 Team", 6));
-        model.addElement(new AllMovies.Movies("6 Team", 5));
-        model.addElement(new AllMovies.Movies("7 Team", 3));
-        model.addElement(new AllMovies.Movies("8 Team", 4));
+        //Read file in
+        try {
+
+            readFile inputFile = new readFile();
+            String[] lines = inputFile.readLines("/Volumes/Transcend/IdeaProjects/src/myFile.txt");
+            for(String line : lines) {
+                System.out.println(line);
+                //display to list
+                model.addElement(new AllMovies.Movies(line, 1));
+
+            }
+
+        } catch(IOException ie) {
+            ie.printStackTrace();
+        }
+
+
 
         list.getSelectionModel().addListSelectionListener(e -> {
             AllMovies.Movies m = list.getSelectedValue();
@@ -220,7 +218,8 @@ public class AllMovies {
             }
         });
         //Go back Button end
-
+        //-----------------------------------------------------------------------------------------
+        //GUI END
 
     } //End function 1
 
