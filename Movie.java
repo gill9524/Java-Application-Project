@@ -94,7 +94,7 @@ public class Movie {
 
     // Main
     public static void main(String []args){
-        System.out.println("########## BEGIN MAIN ##########\n");
+        //System.out.println("########## BEGIN MAIN ##########\n");
 
         HashMap<String, Movie> library = new HashMap<String, Movie>();
 
@@ -198,6 +198,8 @@ public class Movie {
         library.put("Roman Holiday", new Movie("Roman Holiday", "1953", "8.4", "NR", "Classics", "Comedy", "Drama", "Romance"));
         library.put("I Am Not Your Negro", new Movie("I Am Not Your Negro", "2017", "8.9", "PG-13", "Documentary"));
         library.put("Man on Wire", new Movie("Man on Wire", "2008", "8.4", "PG-13", "Documentary", "Special Interest"));
+
+
 
         // Print every item in the hash map
         int count = 0;
