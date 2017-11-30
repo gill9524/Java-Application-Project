@@ -50,7 +50,7 @@ public class Intro {
         JLabel emptyLabel = new JLabel("");
         emptyLabel.setPreferredSize(new Dimension(600, 450));
 
-        frame.setSize(600,450);
+        frame.setSize(900,650);
         //Display the window.
         //frame.pack();
         frame.setVisible(true);
