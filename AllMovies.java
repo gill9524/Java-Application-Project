@@ -13,6 +13,9 @@ import java.util.*;
 import java.util.List;
 
 public class AllMovies {
+
+    String titles[] = new String[100];
+
     private JButton goBackButton;
 
     public AllMovies()  {
@@ -26,7 +29,7 @@ public class AllMovies {
     }
 
     //Class for movies
-    private class Movies{
+    public class Movies{
         String title;
         String year;
         String score;
@@ -290,19 +293,22 @@ public class AllMovies {
         library.put("I Am Not Your Negro", new Movie("I Am Not Your Negro", "2017", "8.9", "PG-13", "Documentary"));
         library.put("Man on Wire", new Movie("Man on Wire", "2008", "8.4", "PG-13", "Documentary", "Special Interest"));
 
-
+        // Inserting movie titles into the list
         int count = 0;
         for(Map.Entry<String, Movie> entry:library.entrySet()){
-            count++;
             String movie;
             Movie m = entry.getValue();
             movie = m.getTitle();
             model.addElement(new AllMovies.Movies(m.getTitle(),m.getYear() , m.getScore(), m.getRating(), ""));
 
+            // Titles get inserted into a single "Titles" array for easy access
+            titles[count] = movie;
+            count++;
 
         }
         JLabel label = new JLabel();
 
+        // Populating the movie info section on the screen
         list.getSelectionModel().addListSelectionListener(e -> {
             AllMovies.Movies m = list.getSelectedValue();
             label.setText("<html>Name: " + m.getTitle()+ " <br>Rating: " + m.getRating()
