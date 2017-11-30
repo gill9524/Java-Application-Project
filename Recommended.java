@@ -63,12 +63,14 @@ public class Recommended {
 
         JButton goBackButton = new JButton("Go Back");
         JButton deleteButton = new JButton("Delete");
-        JButton rateButton = new JButton("Rate");
+        JButton dislikeButton = new JButton("Dislike");
+        JButton likeButton = new JButton("Like");
 
         // Button
         deleteButton.setActionCommand("Delete");
         goBackButton.setActionCommand("Go Back");
-        rateButton.setActionCommand("Rate");
+        dislikeButton.setActionCommand("Dislike");
+        likeButton.setActionCommand("Like");
 
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -95,7 +97,7 @@ public class Recommended {
         //Display the window.
         // frame.pack();
         frame.add(splitPane);
-        frame.setSize(600,450);
+        frame.setSize(900,650);
         frame.setVisible(true);
 
         splitPane.setDividerLocation(.4);
@@ -147,24 +149,27 @@ public class Recommended {
         splitPane.setLeftComponent(new JScrollPane(list));
         panel.add(label);
 
-        //Textfield Rating Decleration
+        /*Textfield Rating Decleration
         final JTextField inputRating = new JTextField(50);
         panel.add(inputRating);
         inputRating.setText("Enter Rating");
         inputRating.setBounds(5,370,100,20);
-
+        */
         splitPane.setRightComponent(panel);
 
         panel.setLayout(null);
         //Set position of buttons and Movie Descriptions
-        goBackButton.setBounds(120,400,100,20);
-        deleteButton.setBounds(236,400,100,20);
-        rateButton.setBounds(5, 400, 100, 20);
+        goBackButton.setBounds(280,580,100,20);
+        deleteButton.setBounds(420,580,100,20);
+        dislikeButton.setBounds(5, 580, 100, 20);
+        likeButton.setBounds(140, 580, 100, 20);
+
         label.setBounds(80, 5, 300, 40);
         //Create buttons on top of panel
         panel.add(goBackButton);
         panel.add(deleteButton);
-        panel.add(rateButton);
+        panel.add(dislikeButton);
+        panel.add(likeButton);
 
 
 
@@ -194,17 +199,17 @@ public class Recommended {
 
         //Delete Button end
 
-        //Rate Button Begin
-        rateButton.addActionListener(new ActionListener() {
+        //Dislike Button Begin
+        dislikeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String ratingInput = inputRating.getText();
-                int rating = Integer.parseInt(ratingInput);
+                //String ratingInput = inputRating.getText();
+                //int rating = Integer.parseInt(ratingInput);
 
 
                 int index = list.getSelectedIndex();    //Receives position of selected movie
-                Movies movieSelected = list.getSelectedValue(); //Receives information on movie
-
+                Recommended.Movies movieSelected = list.getSelectedValue(); //Receives information on movie
+                System.out.println("Movie " + movieSelected.getName() + " disliked");
 
 
                 //Fill in code to send rating of the selected movie
@@ -214,7 +219,29 @@ public class Recommended {
             }
         });
 
-        //Rate Button end
+        //dislike Button end
+
+        //Dislike Button Begin
+        likeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //String ratingInput = inputRating.getText();
+                //int rating = Integer.parseInt(ratingInput);
+
+
+                int index = list.getSelectedIndex();    //Receives position of selected movie
+                Recommended.Movies movieSelected = list.getSelectedValue(); //Receives information on movie
+                System.out.println("Movie " + movieSelected.getName() + " liked");
+
+
+                //Fill in code to send rating of the selected movie
+                // to a function that will return movies
+                // to be added into the recommendations list via some algorithm
+
+            }
+        });
+
+        //dislike Button end
 
         //Go Back Button Begin
         goBackButton.addActionListener(new ActionListener() {
