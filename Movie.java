@@ -7,6 +7,7 @@ public class Movie {
     String score;
     String rating;
     String genres[] = new String[8];
+    Integer index;
 
     // Constructors
     public Movie(String movieTitle, String releaseYear, String movieScore, String movieRating, String genre1, String genre2, String genre3, String genre4, String genre5, String genre6, String genre7, String genre8){
@@ -22,6 +23,7 @@ public class Movie {
         genres[5] = genre6;
         genres[6] = genre7;
         genres[7] = genre8;
+
 
     }
 
@@ -76,10 +78,15 @@ public class Movie {
         return genres;
     }
 
-    // Set score
+    public Integer getIndex() {return index; }
+
+
+    // Setters
     public void setScore(String movieScore){
         score = movieScore;
     }
+
+    public void setIndex(Integer movieIndex) { index = movieIndex; }
 
 
 
@@ -206,32 +213,46 @@ public class Movie {
 
 
 
-        // Print every item in the hash map
+        // Set the index for  every item in the hash map
         int count = 0;
         for(Map.Entry<String, Movie> entry:library.entrySet()){
+            Movie m = entry.getValue();
+            m.setIndex(count);
             count++;
+        }
+
+        // Print the index and title of every movie in the hash map
+        for(Map.Entry<String, Movie> entry:library.entrySet()){
             String key = entry.getKey();
             Movie m = entry.getValue();
-            System.out.println("##### " + count);
-            System.out.println("\nKey: " + key);
-            System.out.println(String.format("\nValue: %s, %s, %s, %s, %s\n", m.getTitle(), m.getYear(), m.getScore(), m.getRating(), Arrays.toString(m.getGenres())));
+            System.out.println("\n##########\nIndex: " + m.getIndex());
+            System.out.println("Title: " + m.getTitle());
         }
 
+//        // Print every Key/Value pair in the hash map
+//        int count = 0;
+//        for(Map.Entry<String, Movie> entry:library.entrySet()){
+//            count++;
+//            String key = entry.getKey();
+//            Movie m = entry.getValue();
+//            System.out.println("##### " + count);
+//            System.out.println("\nKey: " + key);
+//            System.out.println(String.format("\nValue: %s, %s, %s, %s, %s\n", m.getTitle(), m.getYear(), m.getScore(), m.getRating(), Arrays.toString(m.getGenres())));
+//        }
 
-
-        // Change the score on a movie in the hash map
-        System.out.println("\n########## EXAMPLE:\n");
-        Movie example = library.get("Get Out"); // Original score: "8.3"
-        example.setScore("9.9");
-        example.print();
-
-
-        // Get individual genres of each movie
-        Movie example2 = library.get("Jaws");
-        String theGenres[] = example2.getGenres();
-        for (int i = 0; i < theGenres.length; i++) {
-            System.out.println(theGenres[i]);
-        }
+//        // Change the score on a movie in the hash map
+//        System.out.println("\n########## EXAMPLE:\n");
+//        Movie example = library.get("Get Out"); // Original score: "8.3"
+//        example.setScore("9.9");
+//        example.print();
+//
+//
+//        // Get individual genres of each movie
+//        Movie example2 = library.get("Jaws");
+//        String theGenres[] = example2.getGenres();
+//        for (int i = 0; i < theGenres.length; i++) {
+//            System.out.println(theGenres[i]);
+//        }
 
 
         System.out.println("\n########## END MAIN ##########\n");
