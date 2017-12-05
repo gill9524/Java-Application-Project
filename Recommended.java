@@ -153,13 +153,25 @@ public class Recommended {
         JLabel emptyLabel = new JLabel("");
 
         // Declaration of panel and list
-        JList<Movie> list = new JList();
-        DefaultListModel<Movie> model = new DefaultListModel<> ();
+        JList<String> list = new JList();
+        DefaultListModel<String> model = new DefaultListModel<> ();
         JLabel label = new JLabel();
         JPanel panel = new JPanel();
         JSplitPane splitPane = new JSplitPane();
         //emptyLabel.setPreferredSize(new Dimension(600, 450));
         frame.getContentPane().add(emptyLabel, BorderLayout.CENTER);
+
+
+        //read from file to add into list
+        List<String> RecoList = new ArrayList<String>();
+        try{
+            RecoList = RandomAccessFileEx( RecoList, "" , 0);
+
+        }
+        catch(IOException ie) {
+            ie.printStackTrace();
+        }
+
 
 
         //Display the window.
@@ -170,18 +182,25 @@ public class Recommended {
         splitPane.setDividerLocation(.4);
         list.setModel(model);
 
+
         // Add movies to list
+        for(int i = 0; i < RecoList.size(); i++)
+        {
+            model.addElement(RecoList.get(i));
+
+        }
+        /*
         model.addElement(new Movie("Two Brothers: Pt. II", "2033", "9.9", "R", "Action"));
         model.addElement(new Movie("Mad Max: Fury Road", "2015", "8.6", "R", "Action", "Adventure", "Science Fiction", "Fantasy"));
         model.addElement(new Movie("Get Out", "2017", "8.3", "R", "Comedy", "Horror", "Mystery", "Suspense"));
         model.addElement(new Movie("The Third Man", "1949", "9.3", "NR", "Classics", "Mystery", "Suspense"));
         model.addElement(new Movie("Citizen Kane", "1941", "9.4", "PG", "Classics", "Drama", "Mystery", "Suspense"));
         model.addElement(new Movie("The Wizard of Oz", "1939", "9.4", "G", "Classics", "Kids", "Family", "Musical", "Performing Arts", "Science Fiction", "Fantasy"));
-
+        */
         // Populate movie info on Right panel
         list.getSelectionModel().addListSelectionListener(e -> {
-           Movie m = list.getSelectedValue();
-           label.setText("Name: " + m.getTitle() + "         Score: " + m.getScore());
+           String m = list.getSelectedValue();
+           label.setText("Name: " + m);//.getTitle() + "         Score: " + m.getScore());
         });
 
         //Creating panel
@@ -217,12 +236,13 @@ public class Recommended {
             @Override
             public void actionPerformed(ActionEvent e) {
 
+                String selectedValue = list.getSelectedValue();
 
                 List<String> recommendedList = new ArrayList<String>();
                 List<String> listToWrite = new ArrayList<String>();
 
                 try{
-                    recommendedList = RandomAccessFileEx( listToWrite, "A team" , 2);
+                    recommendedList = RandomAccessFileEx( listToWrite, selectedValue , 2);
 
                 }
                 catch(IOException ie) {
@@ -261,8 +281,8 @@ public class Recommended {
 
 
                 int index = list.getSelectedIndex();    //Receives position of selected movie
-                Movie movieSelected = list.getSelectedValue(); //Receives information on movie
-                System.out.println("Movie " + movieSelected.getTitle() + " disliked");
+               // Movie movieSelected = list.getSelectedValue(); //Receives information on movie
+                //System.out.println("Movie " + movieSelected.getTitle() + " disliked");
 
 
                 //Fill in code to send rating of the selected movie
@@ -283,8 +303,8 @@ public class Recommended {
 
 
                 int index = list.getSelectedIndex();    //Receives position of selected movie
-                Movie movieSelected = list.getSelectedValue(); //Receives information on movie
-                System.out.println("Movie " + movieSelected.getTitle() + " liked");
+               // Movie movieSelected = list.getSelectedValue(); //Receives information on movie
+               // System.out.println("Movie " + movieSelected.getTitle() + " liked");
 
                 List<String> recommendedList = new ArrayList<String>();
                 List<String> listToWrite = new ArrayList<String>();
