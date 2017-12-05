@@ -162,15 +162,7 @@ public class Recommended {
         frame.getContentPane().add(emptyLabel, BorderLayout.CENTER);
 
 
-        //read from file to add into list
-        List<String> RecoList = new ArrayList<String>();
-        try{
-            RecoList = RandomAccessFileEx( RecoList, "" , 0);
 
-        }
-        catch(IOException ie) {
-            ie.printStackTrace();
-        }
 
 
 
@@ -182,6 +174,53 @@ public class Recommended {
         splitPane.setDividerLocation(.4);
         list.setModel(model);
 
+
+        //like Button Begin
+        likeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //String ratingInput = inputRating.getText();
+                //int rating = Integer.parseInt(ratingInput);
+
+
+                int index = list.getSelectedIndex();    //Receives position of selected movie
+                // Movie movieSelected = list.getSelectedValue(); //Receives information on movie
+                // System.out.println("Movie " + movieSelected.getTitle() + " liked");
+
+                List<String> recommendedList = new ArrayList<String>();
+                List<String> listToWrite = new ArrayList<String>();
+
+
+                //**************** Call The Algorithm Here ****************//
+                //*********Get the result into listToWrite array *********//
+
+                //Calls function to write data from array to file
+                try{
+                    recommendedList = RandomAccessFileEx( listToWrite, "" , 1);
+
+                }
+                catch(IOException ie) {
+                    ie.printStackTrace();
+                }
+
+                //Fill in code to send rating of the selected movie
+                // to a function that will return movies
+                // to be added into the recommendations list via some algorithm
+
+            }
+        });
+
+        //like Button end
+
+        //read from file to add into list
+        List<String> RecoList = new ArrayList<String>();
+        try{
+            RecoList = RandomAccessFileEx( RecoList, "" , 0);
+
+        }
+        catch(IOException ie) {
+            ie.printStackTrace();
+        }
 
         // Add movies to list
         for(int i = 0; i < RecoList.size(); i++)
@@ -219,14 +258,12 @@ public class Recommended {
         //Set position of buttons and Movie Descriptions
         goBackButton.setBounds(280,580,100,20);
         deleteButton.setBounds(420,580,100,20);
-        dislikeButton.setBounds(5, 580, 100, 20);
         likeButton.setBounds(140, 580, 100, 20);
 
         label.setBounds(80, 5, 300, 40);
         //Create buttons on top of panel
         panel.add(goBackButton);
         panel.add(deleteButton);
-        panel.add(dislikeButton);
         panel.add(likeButton);
 
 
@@ -272,65 +309,9 @@ public class Recommended {
 
         //Delete Button end
 
-        //Dislike Button Begin
-        dislikeButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //String ratingInput = inputRating.getText();
-                //int rating = Integer.parseInt(ratingInput);
 
 
-                int index = list.getSelectedIndex();    //Receives position of selected movie
-               // Movie movieSelected = list.getSelectedValue(); //Receives information on movie
-                //System.out.println("Movie " + movieSelected.getTitle() + " disliked");
 
-
-                //Fill in code to send rating of the selected movie
-                // to a function that will return movies
-                // to be added into the recommendations list via some algorithm
-
-            }
-        });
-
-        //dislike Button end
-
-        //like Button Begin
-        likeButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //String ratingInput = inputRating.getText();
-                //int rating = Integer.parseInt(ratingInput);
-
-
-                int index = list.getSelectedIndex();    //Receives position of selected movie
-               // Movie movieSelected = list.getSelectedValue(); //Receives information on movie
-               // System.out.println("Movie " + movieSelected.getTitle() + " liked");
-
-                List<String> recommendedList = new ArrayList<String>();
-                List<String> listToWrite = new ArrayList<String>();
-                listToWrite.add("A team");
-                listToWrite.add("B team");
-                listToWrite.add("C team");
-                listToWrite.add("D team");
-                listToWrite.add("E team");
-                listToWrite.add("F team");
-
-                try{
-                    recommendedList = RandomAccessFileEx( listToWrite, "" , 1);
-
-                }
-                catch(IOException ie) {
-                ie.printStackTrace();
-                }
-
-                //Fill in code to send rating of the selected movie
-                // to a function that will return movies
-                // to be added into the recommendations list via some algorithm
-
-            }
-        });
-
-        //like Button end
 
         //Go Back Button Begin
         goBackButton.addActionListener(new ActionListener() {

@@ -2,12 +2,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
+import java.io.*;
 
 
-import java.io.IOException;
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 import java.util.List;
@@ -338,67 +335,17 @@ public class AllMovies {
         panel.setLayout(null);
         //Set position of buttons and Movie Descriptions
         goBackButton.setBounds(280,580,100,20);
-        deleteButton.setBounds(420,580,100,20);
-        dislikeButton.setBounds(5, 580, 100, 20);
+
         likeButton.setBounds(140, 580, 100, 20);
 
         //Display information
         label.setBounds(80, 5, 450, 80);
         //Create buttons on top of panel
         panel.add(goBackButton);
-        panel.add(deleteButton);
-        panel.add(dislikeButton);
+
         panel.add(likeButton);
 
-        //Delete Button begin
-        deleteButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
 
-                int index = list.getSelectedIndex();
-                model.remove(index);
-
-                int size = model.getSize();
-
-
-                if(size == 0) {
-                    deleteButton.setEnabled(false);
-                }
-                else  {
-                    if(index == model.getSize()) index--;
-                }
-
-                list.setSelectedIndex(index);
-                list.ensureIndexIsVisible(index);
-
-            }
-        });
-
-        //Delete Button end
-
-        //dislike Button Begin
-        dislikeButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //String ratingInput = inputRating.getText();
-                //int rating = Integer.parseInt(ratingInput);
-
-
-                int index = list.getSelectedIndex();    //Receives position of selected movie
-                AllMovies.Movies movieSelected = list.getSelectedValue(); //Receives information on movie
-                System.out.println("Movie " + movieSelected.getTitle() + " disliked");
-
-
-                //Fill in code to send rating of the selected movie
-                // to a function that will return movies
-                // to be added into the recommendations list via some algorithm
-
-
-
-            }
-        });
-
-        //dislike Button end
 
         //like Button Begin
         likeButton.addActionListener(new ActionListener() {

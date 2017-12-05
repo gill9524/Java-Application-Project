@@ -1,9 +1,11 @@
+A team
+C team
+D team
+E team
+F team
+A team
 B team
 C team
+D team
 E team
-B team
-C team
-E team
-B team
-C team
-E team
+F team
