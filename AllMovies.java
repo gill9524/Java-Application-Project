@@ -31,14 +31,17 @@ public class AllMovies {
         String year;
         String score;
         String rating;
+
         String genres[] = new String[8];
 
+
         // Constructors
-        public Movies(String movieTitle, String releaseYear, String movieScore, String movieRating, String genre1, String genre2, String genre3, String genre4, String genre5, String genre6, String genre7, String genre8){
+        public Movies(String movieTitle, String releaseYear, String movieScore, String movieRating,  String genre1, String genre2, String genre3, String genre4, String genre5, String genre6, String genre7, String genre8){
             this.title = movieTitle;
             this.year = releaseYear;
             this.score = movieScore;
             this.rating = movieRating;
+
             this.genres[0] = genre1;
             this.genres[1] = genre2;
             this.genres[2] = genre3;
@@ -50,31 +53,31 @@ public class AllMovies {
 
         }
 
-        public Movies(String movieTitle, String releaseYear, String movieScore, String movieRating, String genre1, String genre2, String genre3, String genre4, String genre5, String genre6, String genre7){
-            this(movieTitle, releaseYear, movieScore, movieRating, genre1, genre2, genre3, genre4, genre5, genre6, genre7, null);
+        public Movies(String movieTitle, String releaseYear, String movieScore, String movieRating,   String genre1, String genre2, String genre3, String genre4, String genre5, String genre6, String genre7){
+            this(movieTitle, releaseYear, movieScore, movieRating,  genre1, genre2, genre3, genre4, genre5, genre6, genre7, null);
         }
 
         public Movies(String movieTitle, String releaseYear, String movieScore, String movieRating, String genre1, String genre2, String genre3, String genre4, String genre5, String genre6){
-            this(movieTitle, releaseYear, movieScore, movieRating, genre1, genre2, genre3, genre4, genre5, genre6, null, null);
+            this(movieTitle, releaseYear, movieScore, movieRating,  genre1, genre2, genre3, genre4, genre5, genre6, null, null);
         }
 
         public Movies(String movieTitle, String releaseYear, String movieScore, String movieRating, String genre1, String genre2, String genre3, String genre4, String genre5){
-            this(movieTitle, releaseYear, movieScore, movieRating, genre1, genre2, genre3, genre4, genre5, null, null, null);
+            this(movieTitle, releaseYear, movieScore, movieRating,  genre1, genre2, genre3, genre4, genre5, null, null, null);
         }
 
-        public Movies(String movieTitle, String releaseYear, String movieScore, String movieRating, String genre1, String genre2, String genre3, String genre4){
-            this(movieTitle, releaseYear, movieScore, movieRating, genre1, genre2, genre3, genre4, null, null, null, null);
+        public Movies(String movieTitle, String releaseYear, String movieScore, String movieRating,  String genre1, String genre2, String genre3, String genre4){
+            this(movieTitle, releaseYear, movieScore, movieRating,  genre1, genre2, genre3, genre4, null, null, null, null);
         }
 
         public Movies(String movieTitle, String releaseYear, String movieScore, String movieRating, String genre1, String genre2, String genre3){
-            this(movieTitle, releaseYear, movieScore, movieRating, genre1, genre2, genre3, null, null, null, null, null);
+            this(movieTitle, releaseYear, movieScore, movieRating,  genre1, genre2, genre3, null, null, null, null, null);
         }
 
-        public Movies(String movieTitle, String releaseYear, String movieScore, String movieRating, String genre1, String genre2){
-            this(movieTitle, releaseYear, movieScore, movieRating, genre1, genre2, null, null, null, null, null, null);
+        public Movies(String movieTitle, String releaseYear, String movieScore, String movieRating,  String genre1, String genre2){
+            this(movieTitle, releaseYear, movieScore, movieRating,  genre1, genre2, null, null, null, null, null, null);
         }
 
-        public Movies(String movieTitle, String releaseYear, String movieScore, String movieRating, String genre1){
+        public Movies(String movieTitle, String releaseYear, String movieScore, String movieRating,  String genre1){
             this(movieTitle, releaseYear, movieScore, movieRating, genre1, null, null, null, null, null, null, null);
         }
 
@@ -95,6 +98,7 @@ public class AllMovies {
         public String getRating(){
             return rating;
         }
+
 
         public String[] getGenres(){
             return genres;
@@ -297,7 +301,7 @@ public class AllMovies {
             String movie;
             Movie m = entry.getValue();
             movie = m.getTitle();
-            model.addElement(new AllMovies.Movies(m.getTitle(),m.getYear() , m.getScore(), m.getRating(), ""));
+            model.addElement(new AllMovies.Movies(m.getTitle(),m.getYear() , m.getScore(), m.getRating(), " "));
 
 
         }

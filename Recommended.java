@@ -4,11 +4,12 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 import javax.swing.DefaultListModel;
-
 
 
 public class Recommended {
@@ -51,6 +52,86 @@ public class Recommended {
 
 
     }
+    //Function to read, write, or delete recommended items in file
+    // Action 0 is read, 1 is write, 2 is delete
+    public List<String> RandomAccessFileEx( List<String> data1, String data,  int action)
+    throws IOException{
+
+         String Filepath = "/Volumes/Transcend/IdeaProjects/src/Recommended.txt";
+
+         File inputFile = new File("/Volumes/Transcend/IdeaProjects/src/Recommended.txt");
+         File tempFile = new File("/Volumes/Transcend/IdeaProjects/src/tempFile.txt");
+
+
+            String line = null;
+
+            List<String> recommendedList = new ArrayList<String>();
+
+            //Write to Data file
+            if(action == 1) {
+
+                FileWriter filewriter = new FileWriter(Filepath, true);
+
+                BufferedWriter bufferedWriter = new BufferedWriter(filewriter);
+
+                for (int i = 0; i < data1.size(); i++) {
+                    bufferedWriter.write(data1.get(i));
+                    bufferedWriter.newLine();
+
+                }
+                System.out.println("File written successfully");
+
+                bufferedWriter.close();
+
+
+            }
+            //Read Data from file
+            else if (action == 0)
+            {
+                BufferedReader bufferReader = new BufferedReader(new FileReader(Filepath));
+                //Reads all lines from file
+                while((line = bufferReader.readLine()) != null)
+                {
+                    recommendedList.add(line);
+                }
+                bufferReader.close();
+                return recommendedList;
+            }
+
+            //Delete data from file
+            else if (action == 2) {
+                System.out.println("Delete completed");
+
+                String lineToRemove = data;
+                String currentLine;
+                BufferedReader bufferedReader = new BufferedReader(new FileReader(Filepath));
+
+                FileWriter filewriter = new FileWriter("/Volumes/Transcend/IdeaProjects/src/tempFile.txt");
+
+                BufferedWriter bufferedWriter = new BufferedWriter(filewriter);
+
+
+                while((currentLine = bufferedReader.readLine()) != null) {
+                    String trimmedLine = currentLine.trim();
+                    if(trimmedLine.equals(lineToRemove)) continue;
+                    bufferedWriter.write(currentLine);
+                    bufferedWriter.newLine();
+
+
+
+
+                }
+
+                bufferedWriter.close();
+                bufferedReader.close();
+
+                tempFile.renameTo(inputFile);
+
+            }
+
+
+            return recommendedList;
+        }
 
 
 
@@ -178,10 +259,24 @@ public class Recommended {
             @Override
             public void actionPerformed(ActionEvent e) {
 
+
+                List<String> recommendedList = new ArrayList<String>();
+                List<String> listToWrite = new ArrayList<String>();
+
+                try{
+                    recommendedList = RandomAccessFileEx( listToWrite, "A team" , 2);
+
+                }
+                catch(IOException ie) {
+                    ie.printStackTrace();
+                }
+
                 int index = list.getSelectedIndex();
                 model.remove(index);
 
                 int size = model.getSize();
+
+
 
 
                 if(size == 0) {
@@ -221,7 +316,7 @@ public class Recommended {
 
         //dislike Button end
 
-        //Dislike Button Begin
+        //like Button Begin
         likeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -233,6 +328,22 @@ public class Recommended {
                 Recommended.Movies movieSelected = list.getSelectedValue(); //Receives information on movie
                 System.out.println("Movie " + movieSelected.getName() + " liked");
 
+                List<String> recommendedList = new ArrayList<String>();
+                List<String> listToWrite = new ArrayList<String>();
+                listToWrite.add("A team");
+                listToWrite.add("B team");
+                listToWrite.add("C team");
+                listToWrite.add("D team");
+                listToWrite.add("E team");
+                listToWrite.add("F team");
+
+                try{
+                    recommendedList = RandomAccessFileEx( listToWrite, "" , 1);
+
+                }
+                catch(IOException ie) {
+                ie.printStackTrace();
+                }
 
                 //Fill in code to send rating of the selected movie
                 // to a function that will return movies
@@ -241,7 +352,7 @@ public class Recommended {
             }
         });
 
-        //dislike Button end
+        //like Button end
 
         //Go Back Button Begin
         goBackButton.addActionListener(new ActionListener() {
