@@ -92,6 +92,11 @@ public class Movie {
                 + "Score:  " + score + "\n");
     }
 
+    @Override
+    public String toString(){
+        return title;
+    }
+
     // Main
     public static void main(String []args){
         //System.out.println("########## BEGIN MAIN ##########\n");

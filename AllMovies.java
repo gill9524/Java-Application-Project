@@ -13,6 +13,9 @@ import java.util.*;
 import java.util.List;
 
 public class AllMovies {
+
+    String titles[] = new String[100];
+
     private JButton goBackButton;
 
     public AllMovies()  {
@@ -24,9 +27,10 @@ public class AllMovies {
             }
         });
     }
-
+    //Hello
+    
     //Class for movies
-    private class Movies{
+    public class Movies{
         String title;
         String year;
         String score;
@@ -294,19 +298,187 @@ public class AllMovies {
         library.put("I Am Not Your Negro", new Movie("I Am Not Your Negro", "2017", "8.9", "PG-13", "Documentary"));
         library.put("Man on Wire", new Movie("Man on Wire", "2008", "8.4", "PG-13", "Documentary", "Special Interest"));
 
-
+        // Inserting movie titles into the list
         int count = 0;
         for(Map.Entry<String, Movie> entry:library.entrySet()){
-            count++;
             String movie;
             Movie m = entry.getValue();
             movie = m.getTitle();
             model.addElement(new AllMovies.Movies(m.getTitle(),m.getYear() , m.getScore(), m.getRating(), " "));
 
+            // Titles get inserted into a single "Titles" array for easy access
+            titles[count] = movie;
+            count++;
 
         }
+        
+        //Make Graph
+        int row = 12;
+        int col = 100;
+        
+        //Initialize Graph
+        Graph graph = new Graph(row, col);
+        
+        //User1
+        graph.makeEdge(0, 0, 1);
+        graph.makeEdge(0, 7, 1);
+        graph.makeEdge(0, 8, 1);
+        graph.makeEdge(0, 10, 1);
+        graph.makeEdge(0, 14, 1);
+        graph.makeEdge(0, 19, 1);
+        graph.makeEdge(0, 20, 1);
+        graph.makeEdge(0, 21, 1);
+        graph.makeEdge(0, 42, 1);
+        graph.makeEdge(0, 45, 1);
+        graph.makeEdge(0, 46, 1);
+        graph.makeEdge(0, 54, 1);
+        graph.makeEdge(0, 72, 1);
+        graph.makeEdge(0, 86, 1);
+        
+        //User2
+        graph.makeEdge(1, 1, 1);
+        graph.makeEdge(1, 2, 1);
+        graph.makeEdge(1, 3, 1);
+        graph.makeEdge(1, 5, 1);
+        graph.makeEdge(1, 17, 1);
+        graph.makeEdge(1, 18, 1);
+        graph.makeEdge(1, 24, 1);
+        graph.makeEdge(1, 32, 1);
+        graph.makeEdge(1, 39, 1);
+        graph.makeEdge(1, 43, 1);
+        graph.makeEdge(1, 49, 1);
+        graph.makeEdge(1, 55, 1);
+        graph.makeEdge(1, 62, 1);
+        graph.makeEdge(1, 66, 1);
+        graph.makeEdge(1, 69, 1);
+        graph.makeEdge(1, 71, 1);
+        graph.makeEdge(1, 76, 1);
+        graph.makeEdge(1, 77, 1);
+        
+        //User3
+        graph.makeEdge(2, 4, 1);
+        graph.makeEdge(2, 23, 1);
+        graph.makeEdge(2, 33, 1);
+        graph.makeEdge(2, 36, 1);
+        graph.makeEdge(2, 41, 1);
+        graph.makeEdge(2, 70, 1);
+        graph.makeEdge(2, 80, 1);
+        graph.makeEdge(2, 83, 1);
+        graph.makeEdge(2, 87, 1);
+        graph.makeEdge(2, 92, 1);
+        graph.makeEdge(2, 95, 1);
+        
+        //User4
+        graph.makeEdge(3, 3, 1);
+        graph.makeEdge(3, 5, 1);
+        graph.makeEdge(3, 17, 1);
+        graph.makeEdge(3, 19, 1);
+        graph.makeEdge(3, 32, 1);
+        graph.makeEdge(3, 46, 1);
+        graph.makeEdge(3, 49, 1);
+        graph.makeEdge(3, 64, 1);
+        graph.makeEdge(3, 67, 1);
+        graph.makeEdge(3, 68, 1);
+        graph.makeEdge(3, 73, 1);
+        graph.makeEdge(3, 89, 1);
+        
+        //User5
+        graph.makeEdge(4, 0, 1);
+        graph.makeEdge(4, 7, 1);
+        graph.makeEdge(4, 10, 1);
+        graph.makeEdge(4, 20, 1);
+        graph.makeEdge(4, 41, 1);
+        graph.makeEdge(4, 42, 1);
+        graph.makeEdge(4, 44, 1);
+        graph.makeEdge(4, 45, 1);
+        graph.makeEdge(4, 54, 1);
+        graph.makeEdge(4, 74, 1);
+        graph.makeEdge(4, 81, 1);
+        graph.makeEdge(4, 86, 1);
+        
+        //User6
+        graph.makeEdge(5, 9, 1);
+        graph.makeEdge(5, 13, 1);
+        graph.makeEdge(5, 25, 1);
+        graph.makeEdge(5, 31, 1);
+        graph.makeEdge(5, 34, 1);
+        graph.makeEdge(5, 37, 1);
+        graph.makeEdge(5, 52, 1);
+        graph.makeEdge(5, 56, 1);
+        graph.makeEdge(5, 59, 1);
+        graph.makeEdge(5, 61, 1);
+        graph.makeEdge(5, 75, 1);
+        graph.makeEdge(5, 85, 1);
+        graph.makeEdge(5, 94, 1);
+        graph.makeEdge(5, 96, 1);
+        graph.makeEdge(5, 98, 1);
+        graph.makeEdge(5, 99, 1);
+        
+        //User7
+        graph.makeEdge(6, 11, 1);
+        graph.makeEdge(6, 12, 1);
+        graph.makeEdge(6, 14, 1);
+        graph.makeEdge(6, 16, 1);
+        graph.makeEdge(6, 21, 1);
+        graph.makeEdge(6, 48, 1);
+        graph.makeEdge(6, 56, 1);
+        graph.makeEdge(6, 59, 1);
+        graph.makeEdge(6, 61, 1);
+        graph.makeEdge(6, 72, 1);
+        graph.makeEdge(6, 80, 1);
+        graph.makeEdge(6, 88, 1);
+        graph.makeEdge(6, 94, 1);
+        graph.makeEdge(6, 96, 1);
+        graph.makeEdge(6, 97, 1);
+        
+        //User8
+        graph.makeEdge(7, 12, 1);
+        graph.makeEdge(7, 14, 1);
+        graph.makeEdge(7, 16, 1);
+        graph.makeEdge(7, 26, 1);
+        graph.makeEdge(7, 38, 1);
+        graph.makeEdge(7, 48, 1);
+        graph.makeEdge(7, 66, 1);
+        graph.makeEdge(7, 79, 1);
+        graph.makeEdge(7, 88, 1);
+        graph.makeEdge(7, 97, 1);
+        
+        //User9
+        graph.makeEdge(8, 6, 1);
+        graph.makeEdge(8, 11, 1);
+        graph.makeEdge(8, 12, 1);
+        graph.makeEdge(8, 26, 1);
+        graph.makeEdge(8, 48, 1);
+        graph.makeEdge(8, 53, 1);
+        graph.makeEdge(8, 67, 1);
+        graph.makeEdge(8, 72, 1);
+        graph.makeEdge(8, 79, 1);
+        graph.makeEdge(8, 91, 1);
+        
+        //User10
+        graph.makeEdge(9, 4, 1);
+        graph.makeEdge(9, 8, 1);
+        graph.makeEdge(9, 22, 1);
+        graph.makeEdge(9, 30, 1);
+        graph.makeEdge(9, 36, 1);
+        graph.makeEdge(9, 38, 1);
+        graph.makeEdge(9, 40, 1);
+        graph.makeEdge(9, 41, 1);
+        graph.makeEdge(9, 51, 1);
+        graph.makeEdge(9, 53, 1);
+        graph.makeEdge(9, 58, 1);
+        graph.makeEdge(9, 63, 1);
+        graph.makeEdge(9, 70, 1);
+        graph.makeEdge(9, 77, 1);
+        graph.makeEdge(9, 78, 1);
+        graph.makeEdge(9, 83, 1);
+        graph.makeEdge(9, 87, 1);
+        graph.makeEdge(9, 90, 1);
+        graph.makeEdge(9, 95, 1);
+        
         JLabel label = new JLabel();
 
+        // Populating the movie info section on the screen
         list.getSelectionModel().addListSelectionListener(e -> {
             AllMovies.Movies m = list.getSelectedValue();
             label.setText("<html>Name: " + m.getTitle()+ " <br>Rating: " + m.getRating()
