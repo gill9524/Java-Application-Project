@@ -53,83 +53,83 @@ public class Recommended {
     //Function to read, write, or delete recommended items in file
     // Action 0 is read, 1 is write, 2 is delete
     public List<String> RandomAccessFileEx( List<String> data1, String data,  int action)
-    throws IOException{
+            throws IOException{
 
-         String Filepath = "/Volumes/Transcend/IdeaProjects/src/Recommended.txt";
+        String Filepath = "/Volumes/Transcend/IdeaProjects/src/Recommended.txt";
 
-         File inputFile = new File("/Volumes/Transcend/IdeaProjects/src/Recommended.txt");
-         File tempFile = new File("/Volumes/Transcend/IdeaProjects/src/tempFile.txt");
+        File inputFile = new File("/Volumes/Transcend/IdeaProjects/src/Recommended.txt");
+        File tempFile = new File("/Volumes/Transcend/IdeaProjects/src/tempFile.txt");
 
 
-            String line = null;
+        String line = null;
 
-            List<String> recommendedList = new ArrayList<String>();
+        List<String> recommendedList = new ArrayList<String>();
 
-            //Write to Data file
-            if(action == 1) {
+        //Write to Data file
+        if(action == 1) {
 
-                FileWriter filewriter = new FileWriter(Filepath, true);
+            FileWriter filewriter = new FileWriter(Filepath, true);
 
-                BufferedWriter bufferedWriter = new BufferedWriter(filewriter);
+            BufferedWriter bufferedWriter = new BufferedWriter(filewriter);
 
-                for (int i = 0; i < data1.size(); i++) {
-                    bufferedWriter.write(data1.get(i));
-                    bufferedWriter.newLine();
-
-                }
-                System.out.println("File written successfully");
-
-                bufferedWriter.close();
-
+            for (int i = 0; i < data1.size(); i++) {
+                bufferedWriter.write(data1.get(i));
+                bufferedWriter.newLine();
 
             }
-            //Read Data from file
-            else if (action == 0)
+            System.out.println("File written successfully");
+
+            bufferedWriter.close();
+
+
+        }
+        //Read Data from file
+        else if (action == 0)
+        {
+            BufferedReader bufferReader = new BufferedReader(new FileReader(Filepath));
+            //Reads all lines from file
+            while((line = bufferReader.readLine()) != null)
             {
-                BufferedReader bufferReader = new BufferedReader(new FileReader(Filepath));
-                //Reads all lines from file
-                while((line = bufferReader.readLine()) != null)
-                {
-                    recommendedList.add(line);
-                }
-                bufferReader.close();
-                return recommendedList;
+                recommendedList.add(line);
             }
-
-            //Delete data from file
-            else if (action == 2) {
-                System.out.println("Delete completed");
-
-                String lineToRemove = data;
-                String currentLine;
-                BufferedReader bufferedReader = new BufferedReader(new FileReader(Filepath));
-
-                FileWriter filewriter = new FileWriter("/Volumes/Transcend/IdeaProjects/src/tempFile.txt");
-
-                BufferedWriter bufferedWriter = new BufferedWriter(filewriter);
-
-
-                while((currentLine = bufferedReader.readLine()) != null) {
-                    String trimmedLine = currentLine.trim();
-                    if(trimmedLine.equals(lineToRemove)) continue;
-                    bufferedWriter.write(currentLine);
-                    bufferedWriter.newLine();
-
-
-
-
-                }
-
-                bufferedWriter.close();
-                bufferedReader.close();
-
-                tempFile.renameTo(inputFile);
-
-            }
-
-
+            bufferReader.close();
             return recommendedList;
         }
+
+        //Delete data from file
+        else if (action == 2) {
+            System.out.println("Delete completed");
+
+            String lineToRemove = data;
+            String currentLine;
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(Filepath));
+
+            FileWriter filewriter = new FileWriter("/Volumes/Transcend/IdeaProjects/src/tempFile.txt");
+
+            BufferedWriter bufferedWriter = new BufferedWriter(filewriter);
+
+
+            while((currentLine = bufferedReader.readLine()) != null) {
+                String trimmedLine = currentLine.trim();
+                if(trimmedLine.equals(lineToRemove)) continue;
+                bufferedWriter.write(currentLine);
+                bufferedWriter.newLine();
+
+
+
+
+            }
+
+            bufferedWriter.close();
+            bufferedReader.close();
+
+            tempFile.renameTo(inputFile);
+
+        }
+
+
+        return recommendedList;
+    }
 
 
 
@@ -228,6 +228,8 @@ public class Recommended {
             model.addElement(RecoList.get(i));
 
         }
+
+
         /*
         model.addElement(new Movie("Two Brothers: Pt. II", "2033", "9.9", "R", "Action"));
         model.addElement(new Movie("Mad Max: Fury Road", "2015", "8.6", "R", "Action", "Adventure", "Science Fiction", "Fantasy"));
@@ -236,6 +238,8 @@ public class Recommended {
         model.addElement(new Movie("Citizen Kane", "1941", "9.4", "PG", "Classics", "Drama", "Mystery", "Suspense"));
         model.addElement(new Movie("The Wizard of Oz", "1939", "9.4", "G", "Classics", "Kids", "Family", "Musical", "Performing Arts", "Science Fiction", "Fantasy"));
         */
+
+
         // Populate movie info on Right panel
         list.getSelectionModel().addListSelectionListener(e -> {
            String m = list.getSelectedValue();
