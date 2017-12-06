@@ -1,25 +1,26 @@
-package Project;
-
 import java.util.*;
 
 public class Graph {
-    private int _row;
-    private int _col;
+    private int _vertices;
     private int[][] _matrix;
-    private LinkedList<Integer> adjacent[]; //Adjacency List
 
-    public Graph(int row, int col){
-        _row = row;
-        _col = col;
-        _matrix = new int[_row + 1][_col + 1];
+    private Queue<Node> _queue;
+    static ArrayList<Node> _node = new ArrayList();
+
+    public Graph(){
+        _queue = new LinkedList<Node>();
     }
 
-    public int getRows(){ return _row; }
-    public int getCol(){ return _col; }
+    public Graph(int vertices){
+        _vertices = vertices;
+        _matrix = new int[_vertices + 1][_vertices + 1];
+        //_queue = new LinkedList<Node>();
+    }
+
+    public int getVertices(){ return _vertices; }
     public int[][] getMatrix(){ return _matrix; }
 
-    public void setRows(int row){ _row = row; }
-    public void setCol(int col){ _col = col; }
+    public void setVertices(int vertices){ _vertices = vertices; }
     public void setMatrix(int[][] matrix){ _matrix = matrix; }
 
     public void makeEdge(int row, int col, int edge){
@@ -68,30 +69,52 @@ public class Graph {
         return true;
     }
 
-    //Search graph using BFS
-    void BFS(int row, int col){
-        //Mark all nodes as not visited
-        boolean visited [][] = new boolean [_row][_col];
+    public ArrayList<Node> findAdjacent(int matrix[][], Node x){
+        int index = -1;
 
-        //Make Queue
-        LinkedList<Integer> queue = new LinkedList<>();
+        ArrayList<Node> adjacent = new ArrayList<>();
+        for(int i = 0; i < _node.size(); i++){
+            if(_node.get(i).equals(x)){
+                index = i;
+                break;
+            }
+        }
 
-        //Mark current node as visited
-        visited[row][col] = true;
-        queue.add(row, col);
-
-        while(queue.size() != 0){
-            //Dequeue columns
-            col = queue.poll();
-
-            Iterator<Integer> i = adjacent[col].listIterator();
-            while(i.hasNext()){
-                int n = i.next();
-                if(!visited[n][col]){
-                    visited[n][col] = true;
-                    queue.add(n);
+        if(index != -1){
+            for(int j = 0; j < matrix[index].length; j++){
+                if(matrix[index][j] == 1){
+                    adjacent.add(_node.get(j));
                 }
             }
         }
+        return adjacent;
+    }
+
+    //Search graph using BFS
+    public List<String> BFS(int matrix[][], Node node){
+        //Mark all nodes as not visited
+        _queue.add(node);
+        node._visited = true;
+
+        List<String> recommend = new ArrayList<>();
+
+        int j = 0;
+        while(_queue.size() != 0){
+            //Dequeue source vertex
+            Node current = _queue.remove();
+            recommend.add(current._data);
+
+            ArrayList<Node> adjacent = findAdjacent(matrix, current);
+            for(int i = 0; i < adjacent.size(); i++){
+                Node n = adjacent.get(i);
+                if(n != null && !n._visited){
+                    _queue.add(n);
+                    n._visited = true;
+                }
+            }
+            j++;
+        }
+
+        return recommend;
     }
 }
