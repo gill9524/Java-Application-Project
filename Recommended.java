@@ -54,10 +54,17 @@ public class Recommended {
     public List<String> RandomAccessFileEx( List<String> data1, String data,  int action)
             throws IOException{
 
+<<<<<<< HEAD
+        String Filepath = "/Volumes/Transcend/IdeaProjects/src/Recommended.txt";
+
+        File inputFile = new File("/Volumes/Transcend/IdeaProjects/src/Recommended.txt");
+        File tempFile = new File("/Volumes/Transcend/IdeaProjects/src/tempFile.txt");
+=======
         String Filepath = "/Users/MAG/SJSU/2017Fall/CMPE 130/Project/130Project/Recommended.txt";
 
         File inputFile = new File("/Users/MAG/SJSU/2017Fall/CMPE 130/Project/130Project/Recommended.txt");
         File tempFile = new File("/Users/MAG/SJSU/2017Fall/CMPE 130/Project/130Project/tempFile.txt");
+>>>>>>> Mike-branch
 
 
         String line = null;
@@ -103,7 +110,11 @@ public class Recommended {
             String currentLine;
             BufferedReader bufferedReader = new BufferedReader(new FileReader(Filepath));
 
+<<<<<<< HEAD
+            FileWriter filewriter = new FileWriter("/Volumes/Transcend/IdeaProjects/src/tempFile.txt");
+=======
             FileWriter filewriter = new FileWriter("/Users/MAG/SJSU/2017Fall/CMPE 130/Project/130Project/tempFile.txt");
+>>>>>>> Mike-branch
 
             BufferedWriter bufferedWriter = new BufferedWriter(filewriter);
 
